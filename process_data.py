@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import sys
 import pandas as pd
 import numpy as np
@@ -37,7 +31,8 @@ def clean_data(df):
 
 def save_data(df, database_filename):
     engine = create_engine('sqlite:///../'+database_filename)
-    df.to_sql(df, engine, index=False)  
+    table_name = database_filename.split("/")[-1].split(".")[0]
+    df.to_sql(table_name, engine, index=False) 
 
 
 def main():
@@ -58,9 +53,13 @@ def main():
         print('Cleaned data saved to database!')
     
     else:
-        print('Please provide the filepaths of the messages and categories '              'datasets as the first and second argument respectively, as '              'well as the filepath of the database to save the cleaned data '              'to as the third argument. \n\nExample: python process_data.py '              'disaster_messages.csv disaster_categories.csv '              'DisasterResponse.db')
+        print('Please provide the filepaths of the messages and categories '\
+              'datasets as the first and second argument respectively, as '\
+              'well as the filepath of the database to save the cleaned data '\
+              'to as the third argument. \n\nExample: python process_data.py '\
+              'disaster_messages.csv disaster_categories.csv '\
+              'DisasterResponse.db')
 
 
 if __name__ == '__main__':
     main()
-

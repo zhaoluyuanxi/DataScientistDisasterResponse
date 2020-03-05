@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import sys
 import pandas as pd
 from sqlalchemy import create_engine
@@ -29,8 +23,9 @@ import pickle
 
 
 def load_data(database_filepath):
-    engine = create_engine(database_filepath)
-    df = pd.read_sql("SELECT * FROM df", engine)
+    engine =  create_engine('sqlite:///../'+database_filepath)
+    table_name = database_filename.split("/")[-1].split(".")[0]
+    df = pd.read_sql("SELECT * FROM "+table_name, engine)
     X = df[['message']]
     X = X.message.values
     Y = df.drop(['id','original','genre','message'],axis=1)
@@ -97,9 +92,11 @@ def main():
         print('Trained model saved!')
 
     else:
-        print('Please provide the filepath of the disaster messages database '              'as the first argument and the filepath of the pickle file to '              'save the model to as the second argument. \n\nExample: python '              'train_classifier.py ../data/DisasterResponse.db classifier.pkl')
+        print('Please provide the filepath of the disaster messages database '\
+              'as the first argument and the filepath of the pickle file to '\
+              'save the model to as the second argument. \n\nExample: python '\
+              'train_classifier.py ../data/DisasterResponse.db classifier.pkl')
 
 
 if __name__ == '__main__':
     main()
-
