@@ -23,15 +23,15 @@ import pickle
 
 
 def load_data(database_filepath):
-    engine =  create_engine('sqlite:///../'+database_filepath)
-    table_name = database_filename.split("/")[-1].split(".")[0]
+    engine =  create_engine('sqlite:///./'+database_filepath)
+    table_name = database_filepath.split("/")[-1].split(".")[0]
     df = pd.read_sql("SELECT * FROM "+table_name, engine)
     X = df[['message']]
     X = X.message.values
-    Y = df.drop(['id','original','genre','message'],axis=1)
+    Y = df.drop(['id', 'original', 'genre', 'message'],axis=1)
     category_names = Y.columns
     Y = Y.values
-    return X,Y,category_names
+    return X, Y, category_names
 
 def tokenize(text):
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
@@ -50,10 +50,10 @@ def build_model():
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(KNeighborsClassifier()))
     ])
-    parameters =   parameters = {
+    parameters = {
         'clf__estimator__n_neighbors': [5, 6]
     }
-    cv = GridSearchCV(pipeline, param_grid=parameters)
+    cv = GridSearchCV(pipeline, param_grid=parameters, verbose=3, cv=3)
     return cv
 
 
@@ -61,15 +61,11 @@ def evaluate_model(model, X_test, Y_test, category_names):
     y_pred = model.predict(X_test)
     for i in range(Y_test.shape[1]):
         print(category_names[i])
-        print(classification_report(y_test[:,i], y_pred[:,i]))
-    
-
+        print(classification_report(Y_test[:,i], y_pred[:,i]))
 
 def save_model(model, model_filepath):
     with open(model_filepath, 'wb') as file:
         pickle.dump(model, file)
-     
-
 
 def main():
     if len(sys.argv) == 3:

@@ -3,12 +3,13 @@ import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
 
+
 def load_data(messages_filepath, categories_filepath):
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     categories1 = categories
     
-    categories = categories['categories'].str.split(';',expand=True)
+    categories = categories['categories'].str.split(';', expand=True)
     row = categories.loc[0]
     category_colnames = []
     for i in range(row.shape[0]):
@@ -30,7 +31,7 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
-    engine = create_engine('sqlite:///../'+database_filename)
+    engine = create_engine('sqlite:///./'+database_filename)
     table_name = database_filename.split("/")[-1].split(".")[0]
     df.to_sql(table_name, engine, index=False) 
 

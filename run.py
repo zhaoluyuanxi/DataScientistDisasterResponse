@@ -30,7 +30,7 @@ engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('DisasterResponse', engine)
 
 # load model
-model = joblib.load("../models/model.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -43,6 +43,10 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    genre_mean = df.groupby('genre').count()['message']/df.shape[0]
+    
+    aid_counts = df.groupby('aid_related').count()['message']
+    aid_names = list(aid_counts.index)
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -65,6 +69,34 @@ def index():
             }
         }
     ]
+    graph_one = []
+    graph_one.append(
+                Bar(
+                    x=genre_names,
+                    y=genre_mean
+                ))
+    
+    layout_one = dict(title = 'Proportion of Message Genres',
+                  yaxis= dict(title = 'Proportion'),
+                  xaxis= dict(title = 'Genre'))
+    
+    graph_two = []
+    graph_two.append(
+                Bar(
+                    x=aid_counts,
+                    y=aid_counts
+                ))
+    
+    layout_two = dict(title= 'Distribution of Aid_Related',
+                  yaxis= dict(title = 'Count'),
+                  xaxis= dict(title = 'Aid_Related'))
+     
+           
+              
+    
+    graphs.append(dict(data=graph_one, layout=layout_one))
+    graphs.append(dict(data=graph_two, layout=layout_two))
+
     
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
