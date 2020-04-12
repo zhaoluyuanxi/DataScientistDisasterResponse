@@ -5,6 +5,17 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    load_data:
+    load messages and categories data
+
+    arguments:
+    messages_filepath:the filepaths of messages data
+    categories_filepath:the filepaths of categories data
+
+    retruns:
+    df:merged data df of messages and categories on ID
+    """
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = messages.merge(categories, on=['id'])  
@@ -13,6 +24,16 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    clean_data:
+    clean data by split categories to columns,converts categories values to binary values,drop dulicates values
+
+    arguments:
+    datdframe of unclened values 
+
+    returns:
+    dataframes of cleaned values
+    """
     categories = df['categories'].str.split(';', expand=True)
     row = categories.loc[0]
     category_colnames = []
@@ -32,6 +53,16 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    save_data:save data to sqlite db
+
+    arguments:
+    df:dataframe need to be saved
+    database_filename:data save filepaths
+
+    return:
+    None
+    """
     engine = create_engine('sqlite:///./'+database_filename)
     table_name = database_filename.split("/")[-1].split(".")[0]
     df.to_sql(table_name, engine, index=False) 

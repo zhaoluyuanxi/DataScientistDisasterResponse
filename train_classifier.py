@@ -23,6 +23,17 @@ import pickle
 
 
 def load_data(database_filepath):
+    """
+    load_data:load model data
+
+    arguments:
+    database_filepath:filepath of the data
+
+    returns:
+    X:features of model data
+    Y:labels of model data
+    category_names:category names of cateories
+    """
     engine =  create_engine('sqlite:///./'+database_filepath)
     table_name = database_filepath.split("/")[-1].split(".")[0]
     df = pd.read_sql("SELECT * FROM "+table_name, engine)
@@ -34,6 +45,13 @@ def load_data(database_filepath):
     return X, Y, category_names
 
 def tokenize(text):
+    """
+    tokenize:text processing,including text.lower,word_tokenize,WordNetLemmatizer
+
+    arguments:text file need to be processed
+
+    return:text processed
+    """
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
@@ -45,6 +63,11 @@ def tokenize(text):
 
 
 def build_model():
+    """
+    build_model:build model GridSearchCV object
+    arguments:none
+    return:GridSearchCV object
+    """
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -58,12 +81,24 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    evaluate_model:print the multi-output classification results
+    arguments:
+    fitted model,X_test test features,Y_test real labels in test,category_names:category names
+    returns:none
+    """
     y_pred = model.predict(X_test)
     for i in range(Y_test.shape[1]):
         print(category_names[i])
         print(classification_report(Y_test[:,i], y_pred[:,i]))
 
 def save_model(model, model_filepath):
+    """
+    save_model:save model
+    arguments:model:
+    modeleed to be saved model_filepath:file path model saved
+    returns:none
+    """
     with open(model_filepath, 'wb') as file:
         pickle.dump(model, file)
 
