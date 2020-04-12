@@ -7,9 +7,13 @@ from sqlalchemy import create_engine
 def load_data(messages_filepath, categories_filepath):
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
-    categories1 = categories
+    df = messages.merge(categories, on=['id'])  
+    return df
     
-    categories = categories['categories'].str.split(';', expand=True)
+
+
+def clean_data(df):
+    categories = df['categories'].str.split(';', expand=True)
     row = categories.loc[0]
     category_colnames = []
     for i in range(row.shape[0]):
@@ -20,12 +24,9 @@ def load_data(messages_filepath, categories_filepath):
         categories[column] = categories[column].str.split('-').str.get(1)
         categories[column] =  pd.to_numeric(categories[column])
         
-    categories = pd.concat([categories, categories1[['id']]], axis=1)
-    df = messages.merge(categories, on=['id'])
-    return df
-
-
-def clean_data(df):
+    df = pd.concat([df, categories], axis=1)
+    df['related'][df['related']==2] = 1
+              
     df = df.drop_duplicates()
     return df
 
