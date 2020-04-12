@@ -1,19 +1,8 @@
 # Readme
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-标准 Readme 样式
+优达学诚数据科学家纳米学位灾害应对通道
 
-README 文件是人们通常最先看到的第一个东西。它应该告诉人们为什么要使用、如何安装、以及如何使用你的代码。README 文件标准化能够使得创建和维护 README 文件更加简单。 毕竟，要写好一个文档不是那么容易的。
-
-本仓库包含以下内容：
-
-1. 一个标准的 README 文件应该是什么样子的[规范](spec.md)。
-2. 一个用于维护 REAME 文件的语法提示工具的链接 ([正在进行中](https://github.com/RichardLitt/standard-readme/issues/5)).
-3. 一个创建标准 README 的[生成器](https://github.com/RichardLitt/generator-standard-readme)。
-4. 一个指向该规范的[徽章](#徽章)。
-5. [标准 README 的实例](example-readmes/) - 比如你正在读的这个文件。
-标准 Readme 是为了开源组件 设计的。尽管它的[背景](#背景)是为了服务于 Node 和 npm 项目, 它同时也可以应用到其他编程语言和包管理器中去。
 
 ## 内容列表
 
