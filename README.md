@@ -21,7 +21,20 @@
 
 1. 数据清理，会对过往已有信息进行清洗
 2. 模型训练，对以往已有标签分类进行训练
-3.通过FLASK进行部署
+3. 通过FLASK进行部署
+D:\WORKSPACE
+|   README.md
+|   
++---app
+|   |   run.py              //Flask file to run the web application
+
+|           
++---data
+
+|       process_data.py          //ETL pipeline scripts
+|       
+\---models
+        train_classifier.py      //machine learning pipeline scripts to train and export a classifier
 
 ## 操作手册
 
