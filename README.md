@@ -23,25 +23,21 @@
 2. 模型训练，对以往已有标签分类进行训练
 3. 通过FLASK进行部署
 
-D:\WORKSPACE <br>
-|>>>README.md <br>
-| <br>
-+---app<br>
-|>>>|>>>run.py>>>>>>>>>>>>>>>//Flask file to run the web application <br>
-|>>>| <br>
-|>>>\---templates>>>>>>>>>>>>>>>//contains html file for the web application <br>
-|>>>>>>>>>>>>go.html <br>
-|>>>>>>>>>>>>master.html <br>
-|<br>           
-+---data <br>
-|>>>>>>>>DisasterResponse.db>>>>>>// output of the ETL pipeline <br>
-|>>>>>>>>disaster_categories.csv>>>// datafile of all the categories <br>
-|>>>>>>>>disaster_messages.csv>>>// datafile of all the messages <br>
-|>>>>>>>>process_data.py>>>>>>>>>//ETL pipeline scripts <br>
-| <br>       
-\---models <br>
-  >>>>>>>>train_classifier.py>>>>>>>>//machine learning pipeline scripts to train and export a classifier <br>
-        
+<pre>
+D:\WORKSPACE
+|   README.md
+|   
++---app
+|   |   run.py              //Flask file to run the web application
+|   |   
+|           master.html
+|           
++---data
+|       process_data.py          //ETL pipeline scripts
+|       
+\---models
+        train_classifier.py      //machine learning pipeline scripts to train and export a classifier
+</pre>        
 
 ## 操作手册
 
