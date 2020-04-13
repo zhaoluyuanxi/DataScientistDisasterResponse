@@ -46,7 +46,7 @@ def clean_data(df):
         categories[column] =  pd.to_numeric(categories[column])
         
     df = pd.concat([df, categories], axis=1)
-    df['related'][df['related']==2] = 1
+    df.related.replace(2, 1, inplace= True)
               
     df = df.drop_duplicates()
     return df
