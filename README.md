@@ -26,17 +26,12 @@
 <pre>
 D:\WORKSPACE
 |   README.md
-|   
-+---app
-|   |   run.py              //Flask file to run the web application
-|   |   
-|           master.html
-|           
-+---data
-|       process_data.py          //ETL pipeline scripts
+|   run.py              //Flask file to run the web application
+|   process_data.py          //ETL pipeline scripts 
+|   train_classifier.py      //machine learning pipeline scripts to train and export a classifier  
 |       
-\---models
-        train_classifier.py      //machine learning pipeline scripts to train and export a classifier
+\---
+       
 </pre>        
 
 ## 操作手册
