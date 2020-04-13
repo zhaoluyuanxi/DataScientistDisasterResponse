@@ -24,8 +24,8 @@
 3. 通过FLASK进行部署
 
 D:\WORKSPACE
-|   README.md
-|   
+>|   README.md
+>|   
 +---app
 |   |   run.py              //Flask file to run the web application
 |   |   
