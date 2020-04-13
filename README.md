@@ -23,10 +23,13 @@
 2. 模型训练，对以往已有标签分类进行训练
 3. 通过FLASK进行部署
 
->D:\WORKSPACE
->|   README.md
->|   
->+---app
+ D:\WORKSPACE
+ 
+ |   README.md
+ 
+ | 
+ 
+ +---app
 >|   |   run.py              //Flask file to run the web application
 >|   |   
 >|   \---templates           //contains html file for the web application
